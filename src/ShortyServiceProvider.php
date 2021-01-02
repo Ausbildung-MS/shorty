@@ -25,7 +25,7 @@ class ShortyServiceProvider extends ServiceProvider
     {
         if (! class_exists('CreateShortyTables')) {
             $this->publishes([
-                __DIR__.'/../database/migrations/create_shorty_tables.php.stub' => database_path('migrations/'.date('Y_m_d_His', time()).'create_shorty_tables.php'),
+                __DIR__.'/../database/migrations/create_shorty_tables.php.stub' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_shorty_tables.php'),
             ], 'migrations');
         }
 
