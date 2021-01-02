@@ -12,7 +12,7 @@ class Link extends Model
 
     public $table = 'shorty_links';
 
-    protected $fillable = ['uuid', 'short', 'destination', 'description', 'title'];
+    protected $fillable = ['uuid', 'short', 'destination', 'description', 'title', 'redirect_status'];
 
     public function visits()
     {

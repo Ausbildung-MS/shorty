@@ -3,7 +3,6 @@
 namespace AusbildungMS\Shorty\Http\Controller;
 
 use AusbildungMS\Shorty\Jobs\RecordLinkVisitJob;
-use AusbildungMS\Shorty\Models\Domain;
 use AusbildungMS\Shorty\Models\Link;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -38,7 +37,7 @@ class LinkController extends Controller
 
         RecordLinkVisitJob::dispatchAfterResponse($link, (new $action)->execute($request, $link));
 
-        return redirect($link->destination);
+        return redirect($link->destination, $link->redirect_status);
 
     }
 }

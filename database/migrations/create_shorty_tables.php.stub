@@ -30,6 +30,7 @@ class CreateShortyTables extends Migration
             $table->unsignedBigInteger('total_visit_count')->default(0)->index();
             $table->string('short');
             $table->string('password')->nullable();
+            $table->smallInteger('redirect_status')->default(302);
 
             $table->unique(['domain_id', 'short']);
 

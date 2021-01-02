@@ -14,9 +14,14 @@ class LinkControllerTest extends TestCase
 
         $link = Link::factory()->create();
 
-        $this->get('http://' . $link->fullUrl)->assertRedirect($link->destination);
+        $this->get('http://' . $link->fullUrl)->assertStatus(302)->assertRedirect($link->destination);
 
         $this->assertCount(1, $link->fresh()->visits);
+
+        $link = Link::factory()->create(['redirect_status' => 301]);
+
+        $this->get('http://' . $link->fullUrl)->assertStatus(301)->assertRedirect($link->destination);
+
     }
 
     /** @test */
