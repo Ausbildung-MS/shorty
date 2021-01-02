@@ -30,6 +30,9 @@ class LinkController extends Controller
                     return $q->where('domain', strtolower($domain));
                 });
             })
+            ->when($domain == config('shorty.root_domain'), function($q) use ($domain) {
+                $q->whereNull('domain_id');
+            })
             ->where('short', $link)
             ->firstOrFail();
 

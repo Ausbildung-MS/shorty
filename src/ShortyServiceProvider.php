@@ -39,7 +39,9 @@ class ShortyServiceProvider extends ServiceProvider
         Route::macro('shorty', function ($url = '') {
 
             if(config('shorty.root_route')) {
-                Route::get(config('shorty.root_route'), ['\\' . LinkController::class, 'redirect'])->name('shorty.redirect');
+                Route::group(['domain' => config('shorty.root_domain')], function() {
+                    Route::get(config('shorty.root_route'), ['\\' . LinkController::class, 'redirect'])->name('shorty.redirect');
+                });
             }
 
             Route::group(['domain' => '{shorty_excluded_domains}'], function() {
