@@ -1,0 +1,60 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateShortyTables extends Migration
+{
+    public function up()
+    {
+        Schema::create('shorty_domains', function (Blueprint $table) {
+            $table->bigIncrements('id');
+
+            $table->uuid('uuid')->nullable()->unique();
+            $table->boolean('https')->default(true);
+            $table->string('domain');
+
+            $table->nullableTimestamps();
+        });
+
+        Schema::create('shorty_links', function (Blueprint $table) {
+            $table->bigIncrements('id');
+
+            $table->nullableMorphs('owner');
+            $table->uuid('uuid')->nullable()->unique();
+            $table->text('destination');
+            $table->string('description')->nullable();
+            $table->string('title')->nullable();
+            $table->foreignId('domain_id')->nullable()->constrained();
+            $table->unsignedBigInteger('total_visit_count')->default(0)->index();
+            $table->string('short');
+            $table->string('password')->nullable();
+
+            $table->unique(['domain_id', 'short']);
+
+            $table->nullableTimestamps();
+        });
+
+
+        Schema::create('shorty_link_visits', function (Blueprint $table) {
+            $table->bigIncrements('id');
+
+            $table->foreignId('link_id');
+            $table->string('hash');
+            $table->boolean('is_recurring')->index()->default(false);
+            $table->string('browser_name')->index()->nullable();
+            $table->string('browser_version')->index()->nullable();
+            $table->text('referer')->index()->nullable();
+            $table->string('referer_domain')->index()->nullable();
+            $table->string('platform_family')->index()->nullable();
+            $table->string('platform_version')->index()->nullable();
+            $table->string('platform_version_name')->index()->nullable();
+            $table->string('is_mobile')->index()->nullable();
+            $table->boolean('is_robot')->index()->default(false);
+            $table->string('robot_name')->index()->nullable();
+            $table->string('robot_version')->index()->nullable();
+            $table->timestamps();
+        });
+    }
+}

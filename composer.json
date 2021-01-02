@@ -1,0 +1,52 @@
+{
+  "name": "ausbildung-ms/shorty",
+  "description": "",
+  "keywords": [
+  ],
+  "homepage": "https://github.com/Ausbildung-MS/shorty",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Patrick Schocke",
+      "email": "patrick@ausbildung-ms.de",
+      "homepage": "https://patrickschocke.de/",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": "^7.4",
+    "illuminate/support": "^8.0",
+    "wolfcast/browser-detection": "^2.9"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^6.0",
+    "phpunit/phpunit": "^9.0"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "AusbildungMS\\Shorty\\ShortyServiceProvider"
+      ]
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "AusbildungMS\\Shorty\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "AusbildungMS\\Shorty\\Tests\\": "tests",
+      "AusbildungMS\\Shorty\\Database\\Factories\\": "database/factories"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "scripts": {
+    "test": "vendor/bin/phpunit",
+    "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+  }
+}
